@@ -1,39 +1,18 @@
-import { AxiosResponse } from "axios";
-import apiClintServer from "../service/api-clint-server";
-import { useEffect, useState } from "react";
-
-interface Game {
-    id: number,
-    name: string
-}
-
-interface FetchGamesResponse {
-    count: number,
-    results: Game[]   
-}
+import { SimpleGrid } from "@chakra-ui/react";
+import useGame from "../hooks/useGame";
+import GameCard from "./GameCard"; 
 
 const GameGrid = () => {
-    const [games, setGames] = useState<Game[]>([]);
-    const [error, setError] = useState("");
-
-    useEffect(() => {
-        apiClintServer
-            .get<FetchGamesResponse>('/games')
-            .then((res: AxiosResponse<FetchGamesResponse>) => {
-                setGames(res.data.results); 
-            })
-            .catch((err) => {
-                setError("Failed to fetch games");
-                console.error(err);
-            });
-    }, []);
+    const { games, error } = useGame();
 
     return (
         <div>
             {error && <p>{error}</p>}
-            <ul>
-                {games.map(game => <li key={game.id}>{game.name}</li>)}
-            </ul>
+            <SimpleGrid columns={{  sm:1,  md: 2,  lg:3 ,   xl:5 }} spacing={10} padding={10}>
+                {games.map((game) => (
+                    <GameCard key={game.id} game={game} />  
+                ))}
+            </SimpleGrid>
         </div>
     );
 };
