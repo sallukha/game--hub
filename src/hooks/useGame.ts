@@ -3,15 +3,26 @@ import apiClintServer from "../service/api-clint-server";
 import { useState } from "react";
 import { AxiosResponse, CanceledError } from "axios";
 
+
+
+ interface platform{
+    id:number,
+    name:string
+    slug:string
+ }
+
+
 export interface Game {
     id: number,
     name: string
-    background_image: string
+    background_image: string,
+    parent_platforms:{platform:platform}[]
 }
 
 interface FetchGamesResponse {
     count: number,
     results: Game[]
+
 }
 
 
