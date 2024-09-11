@@ -5,10 +5,10 @@ import { AxiosResponse, CanceledError } from "axios";
 
 
 
- export     interface platform {
+export interface platform {
     id: number,
     name: string
-    slug: string 
+    slug: string
 }
 
 
