@@ -5,7 +5,7 @@ interface Props {
 }
 
 const CricTicScore = ({ score }: Props) => {
-     
+
     let colorScheme = score > 75 ? "green" : score > 60 ? "yellow" : "red";
 
     return (
