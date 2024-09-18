@@ -1,16 +1,23 @@
+import useData from "../hooks/useData";
 
-import useGenres from "../hooks/useGenres"
-
-
-
-
-const GenralList = () => {
-    const { genres } = useGenres();
-    return (
-        <ul>
-            {genres.map(genre => <li key={genre.id}>{genre.name}</li>)}
-        </ul>
-    )
+interface Genre {
+    id: string;
+    name: string;
 }
 
-export default GenralList
+const GenralList = () => {
+    const { data: genres, error, isLoading } = useData<Genre>('/genres'); // Pass the endpoint
+
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
+
+    return (
+        <ul>
+            {genres.map((genre) => (
+                <li key={genre.id}>{genre.name}</li>
+            ))}
+        </ul>
+    );
+};
+
+export default GenralList;
