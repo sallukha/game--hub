@@ -7,7 +7,7 @@ interface FetchResponse<T> {
     results: T[];
 }
 
-const useData = <T>(endPoint: string) => {  // Hook for fetching any type of data
+const useData = <T>(endPoint: string) => {
     const [data, setData] = useState<T[]>([]);
     const [error, setError] = useState("");
     const [isLoading, setLoading] = useState(false);
