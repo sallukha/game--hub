@@ -5,7 +5,7 @@ import GenralList from "./components/GenralList";
 import { useState } from "react";
 import {Gerne} from "./hooks/useGenres"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
- 
+ hfhgrfngfngfnf
 const App = () => {
   const[setSelectGenre,setSelectedGenre]=useState<Gerne| null>(null)
   return (
