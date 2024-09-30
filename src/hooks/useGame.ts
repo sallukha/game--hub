@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import apiClintServer from "../service/api-clint-server";
 import { useState } from "react";
 import { AxiosResponse, CanceledError } from "axios";
-
+import { Gerne } from "./useGenres";
 
 
 export interface platform {
@@ -10,7 +10,7 @@ export interface platform {
     name: string
     slug: string
 }
-
+ 
 
 export interface Game {
     id: number,
@@ -31,7 +31,7 @@ interface FetchGamesResponse {
 }
 
 
-const useGame = () => {
+const useGame = (setSelectGenre:Gerne|null) => {
     const [games, setGames] = useState<Game[]>([]);
     const [error, setError] = useState("");
     const [isLoding ,setLoding]=useState(false)
