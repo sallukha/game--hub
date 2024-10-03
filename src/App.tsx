@@ -2,14 +2,14 @@ import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenralList from "./components/GenralList";
-import { useState } from "react";
-import {Gerne} from "./hooks/useGenres"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {  useState } from "react";
+import {Genre} from "./hooks/useGenres"
+ 
 
 const App = () => {
-  const[setSelectGenre,setSelectedGenre]=useState<Gerne| null>(null)
+  const[  SelectedGenre,  setSelectedGenre]=useState<Genre| null>(null)
   return (
-    <Router>
+    
       <Grid
         templateAreas={{
           base: `"nav" "main"`,
@@ -22,19 +22,18 @@ const App = () => {
 
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
-            <GenralList onSelectGenre={(genre) => setSelectedGenre(genre)} />
+            <GenralList onSelectGerne={(genre) => setSelectedGenre(genre)} />
           </GridItem>
         </Show>
 
         <GridItem area="main">
-          {/* Define Routes */}
-          <Routes>
-            <Route path="/" element={<GameGrid setSelectGenre={setSelectedGenre} />} />
+        
+           <GameGrid  SelectedGenre={SelectedGenre}/>
              
-          </Routes>
+         
         </GridItem>
       </Grid>
-    </Router>
+    
   );
 };
 

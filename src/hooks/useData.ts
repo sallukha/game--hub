@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AxiosResponse, CanceledError } from "axios";
+import { AxiosRequestConfig, AxiosResponse, CanceledError } from "axios";
 import apiClintServer from "../service/api-clint-server";
 
 interface FetchResponse<T> {
@@ -7,7 +7,7 @@ interface FetchResponse<T> {
     results: T[];
 }
 
-const useData = <T>(endPoint: string) => {
+const useData = <T>(endPoint: string ,_requestConfig?:AxiosRequestConfig ,_deps?:any[]) => {
     const [data, setData] = useState<T[]>([]);
     const [error, setError] = useState("");
     const [isLoading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ const useData = <T>(endPoint: string) => {
         setLoading(true);
 
         apiClintServer
-            .get<FetchResponse<T>>(endPoint, { signal: controller.signal })
+            .get<FetchResponse<T>>(endPoint, { signal: controller.signal, ..._requestConfig})
             .then((res: AxiosResponse<FetchResponse<T>>) => {
                 setData(res.data.results);
                 setLoading(false);
@@ -29,7 +29,7 @@ const useData = <T>(endPoint: string) => {
             });
 
         return () => controller.abort();
-    }, [endPoint]);
+    },  _deps ?[..._deps]:[]);
 
     return { data, error, isLoading };
 };
